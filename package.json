@@ -1,0 +1,31 @@
+{
+  "name": "dynamic_quiz_2",
+  "version": "1.0.0",
+  "description": "dynamic quiz phase 2",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fuzzygardens/Phase2Quiz.git"
+  },
+  "keywords": [
+    "quiz",
+    "cool",
+    "fun",
+    "comp",
+    "sci"
+  ],
+  "author": "Conor Yuen",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/fuzzygardens/Phase2Quiz/issues"
+  },
+  "homepage": "https://github.com/fuzzygardens/Phase2Quiz#readme",
+  "dependencies": {
+    "express": "^4.13.3",
+    "fs": "0.0.2"
+  }
+}
