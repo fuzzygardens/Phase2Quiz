@@ -95,7 +95,7 @@ $("#hold").on("click", "#backward",function() {
         $("#hold").empty();
         $("#hold").append("<h2>" + user + ", " + " You got " + score + " out of " + (Quiz.questions.length) + " correct.</h2>").hide().fadeIn(750); // displays the number of questions answered correctly 
 
-        var data = [((score)/(Quiz.questions.length))*360, ((score - Quiz.questions.length)/(Quiz.questions.length))*360]; //calculates data for format of pie chart
+        var data = [((score)/(Quiz.questions.length))*360, ((Quiz.questions.length - score)/(Quiz.questions.length))*360]; //calculates data for format of pie chart
         var chartNames = ["correct", "incorrect"]; // pie chart chartNames
         var colors = ["#228B22","#FF6347"]; // pie chart colors
         $("#hold").append("<br><br><br><center><canvas id=\"piechart\" width=\"250\" height=\"250\"> </canvas><center>"); // creates pie chart

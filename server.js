@@ -3,6 +3,7 @@ var fs =require('fs');
 var express = require('express');
 var app = express();
 app.use('/Use', express.static(__dirname + '/Use'));
+app.use(express.static("./Use"));
 
 app.get('/', function (req, res) {
   var content = fs.readFileSync("Use/index.html", 'utf8');
