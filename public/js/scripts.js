@@ -195,7 +195,9 @@ $("#hold").on("click", "#backward",function() {
 		if (storedAnswers[x] == Quiz.questions[x]["correct_answer"]){
 			questionsRight++;
 			console.log(storedAnswers[x]);
+			Quiz.questions[x]["global_correct"]++;
 		}
+		Quiz.questions[x]["global_total"]++;
 	}
 	return questionsRight;
 }
