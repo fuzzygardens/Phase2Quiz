@@ -1,21 +1,3 @@
-/*var fs =require('fs');
-
-var express = require('express');
-var app = express();
-app.use('/Use', express.static(__dirname + '/Use'));
-app.use(express.static("./Use"));
-
-app.get('/', function (req, res) {
-  var content = fs.readFileSync("Use/index.html", 'utf8');
-  res.send(content);
-});
-
-app.get('/quiz', function (req, res) {
-  res.send('Hello World! New Stuff!');
-});
-
-var server = app.listen(process.env.PORT || 3000);*/
-
 var fs = require("fs");
 var express = require('express');
 var app = express();
@@ -34,13 +16,13 @@ app.get('/', function (req, res) {
 });
 
 app.get('/quiz', function (req, res) {
-  var content = fs.readFileSync("public/ConorQuiz.json", 'utf8');
+  var content = fs.readFileSync("Data/ConorQuiz.json", 'utf8');
   res.send(content);
 });
 
 app.post('/quiz', function (req, res) {
   console.log(req.body);
   var newQuiz = JSON.stringify(req.body);
-  fs.writeFileSync('public/ConorQuiz.json', newQuiz);
+  fs.writeFileSync('Data/ConorQuiz.json', newQuiz);
   res.send('POST Quiz!');
 });
