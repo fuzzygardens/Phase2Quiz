@@ -115,6 +115,20 @@ $("#hold").on("click", "#backward",function() {
         	drawSegment(canvas, context, i, data, colors, chartNames);
         }
 
+        $("#hold").append("<h2>" + "Here are your results compared to everyone else's!" + "</h2>");
+        $("#hold").append("<br>");
+
+        for (var x=0; x<Quiz.questions.length; x++){
+			$("#hold").append("<h2>" + Quiz.questions[x].text + "</h2>"); //add the question 
+				if(storedAnswers[x] == Quiz.questions[x]["correct_answer"]){
+					$("#hold").append("You got it right!");
+				}
+				if(storedAnswers[x] != Quiz.questions[x]["correct_answer"]){
+					$("#hold").append("You got it wrong :(");
+				}
+			$("#hold").append("<br>");
+		}
+
     });
 });
 
