@@ -121,10 +121,10 @@ $("#hold").on("click", "#backward",function() {
         for (var x=0; x<Quiz.questions.length; x++){
 			$("#hold").append("<h2>" + Quiz.questions[x].text + "</h2>"); //add the question 
 				if(storedAnswers[x] == Quiz.questions[x]["correct_answer"]){
-					$("#hold").append("You got it right!");
+					$("#hold").append("You got it right! The Global Percentage of Right Answers for this Question is " + 100*(Quiz.questions[x]["global_correct"]/Quiz.questions[x]["global_total"]) + "%");
 				}
 				if(storedAnswers[x] != Quiz.questions[x]["correct_answer"]){
-					$("#hold").append("You got it wrong :(");
+					$("#hold").append("You got it wrong! The Global Percentage of Right Answers for this Question is " + 100*(Quiz.questions[x]["global_correct"]/Quiz.questions[x]["global_total"]) + "%");
 				}
 			$("#hold").append("<br>");
 		}
