@@ -101,6 +101,7 @@ $("#hold").on("click", "#backward",function() {
 	$("#hold").on("click", "#result", function(){ //grading function (occurs when submit is pressed in the last question)
 		trackAnswer(); //stores answer in array
         var score = quizResult(); //calls quizResult function, gets the number of right answers
+        postQuiz(); //////////////////////////////////////////////////////////////////////////////////////
         $("#hold").empty();
         $("#hold").append("<h2>" + user + ", " + " You got " + score + " out of " + (Quiz.questions.length) + " correct.</h2>").hide().fadeIn(750); // displays the number of questions answered correctly 
 
@@ -201,5 +202,16 @@ $("#hold").on("click", "#backward",function() {
 	}
 	return questionsRight;
 }
+
+	function postQuiz(){
+		var quizString = JSON.stringify(Quiz);
+		$.ajax({
+			url: "/quiz",
+			type: "POST",
+			data: quizString,
+			contentType: "application/json; charset=utf8",
+			dataType: "json",
+		})
+	}
 
 

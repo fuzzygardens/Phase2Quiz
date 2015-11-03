@@ -40,5 +40,7 @@ app.get('/quiz', function (req, res) {
 
 app.post('/quiz', function (req, res) {
   console.log(req.body);
+  var newQuiz = JSON.stringify(req.body);
+  fs.writeFileSync('public/ConorQuiz.json', newQuiz);
   res.send('POST Quiz!');
 });
