@@ -22,8 +22,8 @@
             "meta_tags": [
                 "Japanese food"
             ],
-            "global_correct": 10,
-            "global_total": 25
+            "global_correct": 11,
+            "global_total": 26
         },
         {
             "text": "What does Catherine refuse to eat?",
@@ -38,7 +38,7 @@
                 "seafood"
             ],
             "global_correct": 7,
-            "global_total": 25
+            "global_total": 26
         },
         {
             "text": "What snack food does Grace like to put on her cookies?",
@@ -53,7 +53,7 @@
                 "potato chips"
             ],
             "global_correct": 8,
-            "global_total": 25
+            "global_total": 26
         },
         {
             "text": "What non-consumable item did Alastair ingest at the age of 3?",
@@ -68,7 +68,7 @@
                 "coins"
             ],
             "global_correct": 2,
-            "global_total": 25
+            "global_total": 26
         },
         {
             "text": "What food did Sam stuff in his nose at the age of 1?",
@@ -83,7 +83,7 @@
                 "raisins"
             ],
             "global_correct": 3,
-            "global_total": 25
+            "global_total": 26
         },
         {
             "text": "What topping did Max stuff in his nose this past summer?",
@@ -98,7 +98,7 @@
                 "whipped cream"
             ],
             "global_correct": 12,
-            "global_total": 25
+            "global_total": 26
         },
         {
             "text": "What is Justin's favorite holiday food?",
@@ -112,8 +112,8 @@
             "meta_tags": [
                 "moon cake"
             ],
-            "global_correct": 11,
-            "global_total": 25
+            "global_correct": 12,
+            "global_total": 26
         },
         {
             "text": "What does Conor bring to movie theaters as a snack?",
@@ -127,8 +127,8 @@
             "meta_tags": [
                 "salad"
             ],
-            "global_correct": 4,
-            "global_total": 25
+            "global_correct": 5,
+            "global_total": 26
         },
         {
             "text": "What is David's favorite ice cream flavor?",
@@ -142,8 +142,8 @@
             "meta_tags": [
                 "ice cream"
             ],
-            "global_correct": 14,
-            "global_total": 25
+            "global_correct": 15,
+            "global_total": 26
         },
         {
             "text": "What does Nathalie like putting in her oatmeal?",
@@ -158,7 +158,7 @@
                 "oatmeal"
             ],
             "global_correct": 14,
-            "global_total": 25
+            "global_total": 26
         }
     ]
 }

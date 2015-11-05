@@ -1,15 +1,12 @@
 /* 
-Program: Dynamic Quiz, Phase 1
+Program: Dynamic Quiz, Phase 2
 Author: Conor Yuen
-Date: 10/9/15
-Notes: Functions for the pie chart was due in part to the functions provided on
-	   http://www.wickedlysmart.com/how-to-make-a-pie-chart-with-html5s-canvas/
-	   Because of formatting issues with the pie chart and time constraints, I ran
-	   into an issue with the pie graph where there seemed to be a third component. 
-	   If I had more time, I would have tried to solve this problem
+Date: 11/5/2015
+Notes: Please allow the web page some time to load the images if it does not load immediately,
+	   It should eventually appear.
 */
 var Quiz;
-function loadQuiz(){
+function loadQuiz(){ // JSON Quiz object
 	$.getJSON('/quiz')
 		.done(function(data){
 			Quiz=data;
@@ -157,7 +154,7 @@ $("#hold").on("click", "#backward",function() {
 		trackAnswer(); //stores answer in array
 		images.innerHTML = "";
         var score = quizResult(); //calls quizResult function, gets the number of right answers
-        postQuiz(); //////////////////////////////////////////////////////////////////////////////////////
+        postQuiz(); 
         $("#hold").empty();
         $("#hold").append("<h2>" + user + ", " + " You got " + score + " out of " + (Quiz.questions.length) + " correct.</h2>").hide().fadeIn(750); // displays the number of questions answered correctly 
 
@@ -174,10 +171,10 @@ $("#hold").on("click", "#backward",function() {
         $("#hold").append("<h2>" + "Here are your results compared to everyone else's!" + "</h2>");
         $("#hold").append("<br>");
 
-        for (var x=0; x<Quiz.questions.length; x++){
-			$("#hold").append("<h2>" + Quiz.questions[x].text + "</h2>"); //add the question 
+        for (var x=0; x<Quiz.questions.length; x++){ // displays the user's results and global results
+			$("#hold").append("<h2>" + Quiz.questions[x].text + "</h2>"); 
 				if(storedAnswers[x] == Quiz.questions[x]["correct_answer"]){
-					$("#hold").append("You got it right! The Global Percentage of Right Answers for this Question is " + (100*(Quiz.questions[x]["global_correct"]/Quiz.questions[x]["global_total"])).toFixed(2) + "%");
+					$("#hold").append("You got it right! The Global Percentage of Right Answers for this Question is " + (100*(Quiz.questions[x]["global_correct"]/Quiz.questions[x]["global_total"])).toFixed(2) + "%"); 
 				}
 				if(storedAnswers[x] != Quiz.questions[x]["correct_answer"]){
 					$("#hold").append("You got it wrong! The Global Percentage of Right Answers for this Question is " + (100*(Quiz.questions[x]["global_correct"]/Quiz.questions[x]["global_total"])).toFixed(2) + "%");
@@ -273,7 +270,7 @@ $("#hold").on("click", "#backward",function() {
 	return questionsRight;
 }
 
-	function postQuiz(){
+	function postQuiz(){ // Sends JSON to server
 		var quizString = JSON.stringify(Quiz);
 		$.ajax({
 			url: "/quiz",
