@@ -3,21 +3,27 @@ Program: Dynamic Quiz, Phase 2
 Author: Conor Yuen
 Date: 11/5/2015
 Notes: Please allow the web page some time to load the images if it does not load immediately,
-	   It should eventually appear.
-*/
+	   It should eventually appear
+	   */
+
 var Quiz;
-function loadQuiz(){ // JSON Quiz object
-	$.getJSON('/quiz')
-		.done(function(data){
-			Quiz=data;
-		})
-}
+ function loadQuiz(){
+	   $.getJSON('/quiz')
+	   	.done(function(data){
+	   		Quiz=data;
+	   	})
+	   }
+	   
 loadQuiz();
+
+
 
 var radioButton = ""; //radio button variable
 var storedAnswers = []; // array of saved answers
 var count = 0; // count variable used for checking the particular question
 var user = ""; //username variable
+
+
 
 $(document).ready(function(){ // initates the javascript code
 	$("#start").click(function() { //when the submit button is pushed
@@ -27,29 +33,28 @@ $(document).ready(function(){ // initates the javascript code
 		}
 		else{
 			$("#hold").empty(); //empty the page
-			$("#hold").append("<h2>" + user + ", " + Quiz.questions[0].text + "</h2>").hide().fadeIn(750); //add the question 
-			for(var i = 0; i < Quiz.questions[0].answers.length; i++){ //number of radio buttons according to the number of answers in the question
-				$("#hold").append("<input type=\"radio\" name=\"answer\"> " + Quiz.questions[0].answers[i] + "<br>"); 
-			}
+				$("#hold").append("<h2>" + user + ", " + Quiz.questions[0].text + "</h2>").hide().fadeIn(750); //add the question 
+				for(var i = 0; i < Quiz.questions[0].answers.length; i++){ //number of radio buttons according to the number of answers in the question
+					$("#hold").append("<input type=\"radio\" name=\"answer\"> " + Quiz.questions[0].answers[i] + "<br>"); 
+				}
 
-			$.getJSON("http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?",
-			{
-				tags: String(Quiz.questions[count].meta_tags),
-				tagmode: "any",
-				format: "json"
-			},
-			function(data) {
-				$.each(data.items, function(i,item){
-					$("<img />").attr("src", item.media.m).appendTo("#images");
-					if ( i == 0 ) return false;
+				$.getJSON("http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?",
+				{
+					tags: String(Quiz.questions[count].meta_tags),
+					tagmode: "any",
+					format: "json"
+				},
+				function(data) {
+					$.each(data.items, function(i,item){
+						$("<img />").attr("src", item.media.m).appendTo("#images");
+						if ( i == 0 ) return false;
+					});
 				});
-			});
 
-			$("#hold").append("<br>");//add a break
-			$("#hold").append("<input id=\"forward\" type=\"button\" value=\"Next\"></input>"); //next button
-		}
-	});
-
+				$("#hold").append("<br>");//add a break
+				$("#hold").append("<input id=\"forward\" type=\"button\" value=\"Next\"></input>"); //next button
+			}
+		});
 
 	//several lines of code below are identitcal to the block above, did not comment for them
 	$("#hold").on("click", "#forward",function() { //when next button is pressed
@@ -116,7 +121,7 @@ $(document).ready(function(){ // initates the javascript code
 		}
 	});
 
-$("#hold").on("click", "#backward",function() { 
+		$("#hold").on("click", "#backward",function() { 
 		trackAnswer(); //stores answer in array
 		count--; // go back to last question
 		images.innerHTML = "";
@@ -137,17 +142,17 @@ $("#hold").on("click", "#backward",function() {
 		$("#hold").append("<input id=\"forward\" type=\"button\" value=\"Next\"></input>"); 
 
 		$.getJSON("http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?",
-			{
-				tags: String(Quiz.questions[count].meta_tags),
-				tagmode: "any",
-				format: "json"
-			},
-			function(data) {
-				$.each(data.items, function(i,item){
-					$("<img />").attr("src", item.media.m).appendTo("#images");
-					if ( i == 0 ) return false;
-				});
+		{
+			tags: String(Quiz.questions[count].meta_tags),
+			tagmode: "any",
+			format: "json"
+		},
+		function(data) {
+			$.each(data.items, function(i,item){
+				$("<img />").attr("src", item.media.m).appendTo("#images");
+				if ( i == 0 ) return false;
 			});
+		});
 	});
 
 	$("#hold").on("click", "#result", function(){ //grading function (occurs when submit is pressed in the last question)
@@ -172,17 +177,17 @@ $("#hold").on("click", "#backward",function() {
         $("#hold").append("<br>");
 
         for (var x=0; x<Quiz.questions.length; x++){ // displays the user's results and global results
-			$("#hold").append("<h2>" + Quiz.questions[x].text + "</h2>"); 
-				if(storedAnswers[x] == Quiz.questions[x]["correct_answer"]){
-					$("#hold").append("You got it right! The Global Percentage of Right Answers for this Question is " + (100*(Quiz.questions[x]["global_correct"]/Quiz.questions[x]["global_total"])).toFixed(2) + "%"); 
-				}
-				if(storedAnswers[x] != Quiz.questions[x]["correct_answer"]){
-					$("#hold").append("You got it wrong! The Global Percentage of Right Answers for this Question is " + (100*(Quiz.questions[x]["global_correct"]/Quiz.questions[x]["global_total"])).toFixed(2) + "%");
-				}
-			$("#hold").append("<br>");
-		}
+        	$("#hold").append("<h2>" + Quiz.questions[x].text + "</h2>"); 
+        if(storedAnswers[x] == Quiz.questions[x]["correct_answer"]){
+        	$("#hold").append("You got it right! The Global Percentage of Right Answers for this Question is " + (100*(Quiz.questions[x]["global_correct"]/Quiz.questions[x]["global_total"])).toFixed(2) + "%"); 
+        }
+        if(storedAnswers[x] != Quiz.questions[x]["correct_answer"]){
+        	$("#hold").append("You got it wrong! The Global Percentage of Right Answers for this Question is " + (100*(Quiz.questions[x]["global_correct"]/Quiz.questions[x]["global_total"])).toFixed(2) + "%");
+        }
+        $("#hold").append("<br>");
+    }
 
-    });
+});
 });
 
 	function checkAnswer(){ // Makes sure an answer is selected 
