@@ -22,7 +22,7 @@ app.get('/quiz', function (req, res) {
 
 app.post('/quiz', function (req, res) {
   console.log(req.body);
-  var newQuiz = JSON.stringify(req.body);
+  var newQuiz = JSON.stringify(req.body, null, 4);
   fs.writeFileSync('Data/ConorQuiz.json', newQuiz);
   res.send('POST Quiz!');
 });

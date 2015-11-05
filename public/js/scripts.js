@@ -34,6 +34,20 @@ $(document).ready(function(){ // initates the javascript code
 			for(var i = 0; i < Quiz.questions[0].answers.length; i++){ //number of radio buttons according to the number of answers in the question
 				$("#hold").append("<input type=\"radio\" name=\"answer\"> " + Quiz.questions[0].answers[i] + "<br>"); 
 			}
+
+			$.getJSON("http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?",
+			{
+				tags: String(Quiz.questions[count].meta_tags),
+				tagmode: "any",
+				format: "json"
+			},
+			function(data) {
+				$.each(data.items, function(i,item){
+					$("<img />").attr("src", item.media.m).appendTo("#images");
+					if ( i == 0 ) return false;
+				});
+			});
+
 			$("#hold").append("<br>");//add a break
 			$("#hold").append("<input id=\"forward\" type=\"button\" value=\"Next\"></input>"); //next button
 		}
@@ -49,6 +63,7 @@ $(document).ready(function(){ // initates the javascript code
 			else if (checkAnswer() == true) { // if user checked an answer and pressed next
 				trackAnswer(); // stores answer in array
 				count++; // go to next question
+				images.innerHTML = "";
 				$("#hold").empty();
 				$("#hold").append("<h2>" + user + ", " + Quiz.questions[count].text + "</h2>").hide().fadeIn(750); //question according to count
 				for(var i = 0; i < Quiz.questions[count].answers.length; i++){
@@ -62,11 +77,25 @@ $(document).ready(function(){ // initates the javascript code
 				$("#hold").append("<br>");
 				$("#hold").append("<input id=\"backward\" type=\"button\" value=\"Back\"></input>"); // back button
 				$("#hold").append("<input id=\"forward\" type=\"button\" value=\"Next\"></input>"); 
+
+				$.getJSON("http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?",
+				{
+					tags: String(Quiz.questions[count].meta_tags),
+					tagmode: "any",
+					format: "json"
+				},
+				function(data) {
+					$.each(data.items, function(i,item){
+						$("<img />").attr("src", item.media.m).appendTo("#images");
+						if ( i == 0 ) return false;
+					});
+				});
 			}
 		}
 		else { //if it is the last question
 			trackAnswer(); // stores answer in array
 			count++;
+			images.innerHTML = "";
 			$("#hold").empty();
 			$("#hold").append("<h2>" + user + ", " + Quiz.questions[count].text + "</h2>").hide().fadeIn(750); 
 			for(var i = 0; i < Quiz.questions[count].answers.length; i++){
@@ -75,12 +104,25 @@ $(document).ready(function(){ // initates the javascript code
 			$("#hold").append("<br>");
 			$("#hold").append("<input id=\"backward\" type=\"button\" value=\"Back\"></input>"); 
 			$("#hold").append("<input id=\"result\" type=\"button\" value=\"End Quiz!\"></input>"); //Go to pie chart
+			$.getJSON("http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?",
+			{
+				tags: String(Quiz.questions[count].meta_tags),
+				tagmode: "any",
+				format: "json"
+			},
+			function(data) {
+				$.each(data.items, function(i,item){
+					$("<img />").attr("src", item.media.m).appendTo("#images");
+					if ( i == 0 ) return false;
+				});
+			});
 		}
 	});
 
 $("#hold").on("click", "#backward",function() { 
 		trackAnswer(); //stores answer in array
 		count--; // go back to last question
+		images.innerHTML = "";
 		$("#hold").empty();
 		$("#hold").append("<h2>" + user + ", " + Quiz.questions[count].text + "</h2>").hide().fadeIn(750); 
 		for(var i = 0; i < Quiz.questions[count].answers.length; i++){
@@ -96,10 +138,24 @@ $("#hold").on("click", "#backward",function() {
 			$("#hold").append("<input id=\"backward\" type=\"button\" value=\"Back\"></input>"); // if not the first question, add a back button
 		}
 		$("#hold").append("<input id=\"forward\" type=\"button\" value=\"Next\"></input>"); 
+
+		$.getJSON("http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?",
+			{
+				tags: String(Quiz.questions[count].meta_tags),
+				tagmode: "any",
+				format: "json"
+			},
+			function(data) {
+				$.each(data.items, function(i,item){
+					$("<img />").attr("src", item.media.m).appendTo("#images");
+					if ( i == 0 ) return false;
+				});
+			});
 	});
 
 	$("#hold").on("click", "#result", function(){ //grading function (occurs when submit is pressed in the last question)
 		trackAnswer(); //stores answer in array
+		images.innerHTML = "";
         var score = quizResult(); //calls quizResult function, gets the number of right answers
         postQuiz(); //////////////////////////////////////////////////////////////////////////////////////
         $("#hold").empty();
@@ -121,10 +177,10 @@ $("#hold").on("click", "#backward",function() {
         for (var x=0; x<Quiz.questions.length; x++){
 			$("#hold").append("<h2>" + Quiz.questions[x].text + "</h2>"); //add the question 
 				if(storedAnswers[x] == Quiz.questions[x]["correct_answer"]){
-					$("#hold").append("You got it right! The Global Percentage of Right Answers for this Question is " + 100*(Quiz.questions[x]["global_correct"]/Quiz.questions[x]["global_total"]) + "%");
+					$("#hold").append("You got it right! The Global Percentage of Right Answers for this Question is " + (100*(Quiz.questions[x]["global_correct"]/Quiz.questions[x]["global_total"])).toFixed(2) + "%");
 				}
 				if(storedAnswers[x] != Quiz.questions[x]["correct_answer"]){
-					$("#hold").append("You got it wrong! The Global Percentage of Right Answers for this Question is " + 100*(Quiz.questions[x]["global_correct"]/Quiz.questions[x]["global_total"]) + "%");
+					$("#hold").append("You got it wrong! The Global Percentage of Right Answers for this Question is " + (100*(Quiz.questions[x]["global_correct"]/Quiz.questions[x]["global_total"])).toFixed(2) + "%");
 				}
 			$("#hold").append("<br>");
 		}
