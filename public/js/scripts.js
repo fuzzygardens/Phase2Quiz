@@ -4,10 +4,10 @@ Author: Conor Yuen
 Date: 11/5/2015
 Notes: Please allow the web page some time to load the images if it does not load immediately,
 	   It should eventually appear
-	   */
+*/
 
 var Quiz;
- function loadQuiz(){
+ function loadQuiz(){ // load quiz
 	   $.getJSON('/quiz')
 	   	.done(function(data){
 	   		Quiz=data;
@@ -22,7 +22,6 @@ var radioButton = ""; //radio button variable
 var storedAnswers = []; // array of saved answers
 var count = 0; // count variable used for checking the particular question
 var user = ""; //username variable
-
 
 
 $(document).ready(function(){ // initates the javascript code

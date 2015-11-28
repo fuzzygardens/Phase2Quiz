@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/styles.css"> <!-- import css -->
+	<title> Dynamic Quiz </title>
+
+
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+	<div id= "hold"> <!-- id of page to dynamically load questions and answers into -->
+		<center>
+				<div id="StartPage">
+				<h1>Welcome to Conor's Quiz! Type in your username to get started</h1>
+				Username:
+				<input type="text" id="refresh"> <!-- username input -->
+				<br/>
+				<br/>
+				<input type="button" id="start" value="Submit"> <!-- submit username -->
+				</center>
+				<div class="dropdown">
+				<br/>
+					<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Choose a Quiz!
+						<span class="caret"></span></button>
+						<ul class="dropdown-menu">
+							<% for (var i=0; i<characters.titles.length; i++) { %>
+							<li>
+								<a href="#">
+									<%= characters.titles[i] %>
+								</a>
+							</li>
+							<% } %>
+						</ul>
+					</div>
+			</div>
+	</div>
+
+	<div id= "images"> <!-- div tags for images -->
+	</div>
+
+</body>
+<script src="js/scripts.js"></script> <!-- import javascript -->
+</html>
+
